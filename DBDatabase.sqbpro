@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Air3550/AIR3550/AIR3550/DBDatabase.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3355"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainFlights"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Account" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="45"/><column index="2" value="72"/><column index="3" value="71"/><column index="4" value="71"/><column index="5" value="71"/><column index="6" value="84"/><column index="7" value="84"/><column index="8" value="62"/><column index="9" value="97"/><column index="10" value="40"/><column index="11" value="54"/><column index="12" value="51"/><column index="13" value="105"/><column index="14" value="77"/><column index="15" value="57"/><column index="16" value="68"/><column index="17" value="58"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Airports" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="56"/><column index="3" value="44"/><column index="4" value="211"/><column index="5" value="87"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Flights" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="56"/><column index="2" value="74"/><column index="3" value="85"/><column index="4" value="87"/><column index="5" value="106"/><column index="6" value="83"/><column index="8" value="137"/><column index="9" value="104"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE Flights (
+    FlightID INT PRIMARY KEY,
+    PlaneType VARCHAR(50),
+    TakeoffTime TIME,
+    LandingTime TIME,
+    DepartureDate DATE,
+    ArrivalDate DATE,
+    OriginLocation VARCHAR(50),
+    DestinationLocation VARCHAR(50),
+    AvailableSeats INT
+);
+
+INSERT INTO Flights (FlightID, PlaneType, TakeoffTime, LandingTime, DepartureDate, ArrivalDate, OriginLocation, DestinationLocation, AvailableSeats)
+VALUES 
+    (1, 'Boeing 737', '08:00:00', '10:30:00', '2023-05-01', '2023-05-01', 'New York', 'Los Angeles', 100),
+    (2, 'Boeing 737', '12:00:00', '14:30:00', '2023-05-01', '2023-05-01', 'Los Angeles', 'New York', 100),
+    (3, 'Boeing 737', '08:00:00', '10:00:00', '2023-05-01', '2023-05-01', 'Cincinnati', 'Detroit', 100),
+    (4, 'Boeing 737', '12:00:00', '14:00:00', '2023-05-01', '2023-05-01', 'Detroit', 'Cincinnati', 100),
+    (5, 'Boeing 737', '09:00:00', '10:45:00', '2023-05-01', '2023-05-01', 'Miami', 'New York', 100),
+    (6, 'Boeing 737', '13:00:00', '14:45:00', '2023-05-01', '2023-05-01', 'New York', 'Miami', 100),
+    (7, 'Boeing 767', '08:00:00', '11:00:00', '2023-05-01', '2023-05-01', 'Cleveland', 'Toledo', 150),
+    (8, 'Boeing 767', '12:00:00', '15:00:00', '2023-05-01', '2023-05-01', 'Toledo', 'Cleveland', 150),
+    (9, 'Boeing 767', '09:00:00', '12:00:00', '2023-05-01', '2023-05-01', 'Los Angeles', 'Spokane', 150),
+    (10, 'Boeing 767', '13:00:00', '16:00:00', '2023-05-01', '2023-05-01', 'Spokane', 'Los Angeles', 150),
+    (11, 'Boeing 767', '10:00:00', '13:30:00', '2023-05-01', '2023-05-01', 'Detroit', 'Miami', 150),
+    (12, 'Boeing 767', '14:00:00', '17:30:00', '2023-05-01', '2023-05-01', 'Miami', 'Detroit', 150),
+    (13, 'Boeing 787', '09:00:00', '13:00:00', '2023-05-01', '2023-05-01', 'Miami', 'Cincinnati', 200),
+	(14, 'Boeing 787', '14:00:00', '18:00:00', '2023-05-01', '2023-05-01', 'Cincinnati', 'Miami', 200),
+	(15, 'Boeing 787', '10:00:00', '13:45:00', '2023-05-01', '2023-05-01', 'Toledo', 'Los Angeles', 200),
+	(16, 'Boeing 787', '15:00:00', '18:45:00', '2023-05-01', '2023-05-01', 'Los Angeles', 'Toledo', 200),
+	(17, 'Boeing 787', '11:00:00', '15:30:00', '2023-05-01', '2023-05-01', 'Cleveland', 'Miami', 200),
+	(18, 'Boeing 787', '16:00:00', '20:30:00', '2023-05-01', '2023-05-01', 'Miami', 'Cleveland', 200),
+	(19, 'Boeing 787', '12:00:00', '16:30:00', '2023-05-01', '2023-05-01', 'Spokane', 'New York', 200),
+	(20, 'Boeing 787', '17:00:00', '21:30:00', '2023-05-01', '2023-05-01', 'New York', 'Spokane', 200);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>

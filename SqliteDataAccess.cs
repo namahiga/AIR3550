@@ -5,6 +5,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Security.Principal;
+using System.Linq;
+
 
 
 namespace AIR3550
@@ -94,6 +96,38 @@ namespace AIR3550
             }
         }
 
+        public static void UpdateDatabaseAcc(DatabaseModel d, string username, string password)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("UPDATE ACCOUNT SET FirstName = @FirstName, MiddleName = @MiddleName, LastName = @LastName, Email = @Email, DateOfBirth = @DateOfBirth, ZipCode = @ZipCode, Gender = @Gender, Address = @Address, PhoneNumber = @PhoneNumber, AccCity = @AccCity, AccState = @AccState WHERE Username = @Username AND Password = @Password", new
+                {
+                    FirstName = d.FirstName,
+                    MiddleName = d.MiddleName,
+                    LastName = d.LastName,
+                    Email = d.Email,
+                    DateOfBirth = d.DateOfBirth,
+                    ZipCode = d.ZipCode,
+                    Gender = d.Gender,
+                    Address = d.Address,
+                    PhoneNumber = d.PhoneNumber,
+                    AccCity = d.AccCity,
+                    AccState = d.AccState,
+                    Username = username,
+                    Password = password
+                });
+            }
+        }
+
+
+        public static DatabaseModel PopulateDatabaseAcc(string username, string password)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<DatabaseModel>("SELECT * FROM Account WHERE Username = @Username AND Password = @Password", new { Username = username, Password = password });
+                return output.FirstOrDefault();
+            }
+        }
 
     }
 }

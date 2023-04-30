@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace AIR3550
 {
     public partial class SearchFlights : Form
     {
+        private DatabaseModel user;
         public SearchFlights()
         {
             InitializeComponent();
@@ -19,7 +21,11 @@ namespace AIR3550
 
         private void editAccountInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SignUp newForm = new SignUp();
+
+            // Retrieve the user's information from the database
+            DatabaseModel user = SqliteDataAccess.PopulateDatabaseAcc(loginPage.username, loginPage.password);
+
+            EditInfo newForm = new EditInfo(loginPage.username, loginPage.password);
 
             // Show the new form
             newForm.Show();
