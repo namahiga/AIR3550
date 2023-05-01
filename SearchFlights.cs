@@ -180,9 +180,9 @@ namespace AIR3550
 
                 Console.WriteLine($"Points: {points}, Money: {money}");
                 // Show the new form
-               // newForm.Show();
+                newForm.Show();
 
-                //this.Hide();
+                this.Hide();
             }
         }
 
