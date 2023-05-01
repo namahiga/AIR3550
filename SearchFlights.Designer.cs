@@ -1,17 +1,16 @@
-﻿
-namespace AIR3550
+﻿namespace AIR3550
 {
     partial class SearchFlights
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        /// <summary> 
+        /// Required designer variable. 
+        /// </summary> 
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <summary> 
+        /// Clean up any resources being used. 
+        /// </summary> 
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param> 
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -21,15 +20,15 @@ namespace AIR3550
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Windows Form Designer generated code 
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor. 
+        /// </summary> 
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuBar = new System.Windows.Forms.MenuStrip();
             this.myAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewPointsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editAccountInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,36 +39,35 @@ namespace AIR3550
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.menuStrip1.SuspendLayout();
+            this.tripTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.SearchFlightButton = new System.Windows.Forms.Button();
+            this.arrivalCalendar = new System.Windows.Forms.MonthCalendar();
+            this.departureCalendar = new System.Windows.Forms.MonthCalendar();
+            this.arrivalDateLabel = new System.Windows.Forms.Label();
+            this.departDateLabel = new System.Windows.Forms.Label();
+            this.noOfPassengersValue = new System.Windows.Forms.NumericUpDown();
+            this.passengersLabel = new System.Windows.Forms.Label();
+            this.departPlaceComboBox = new System.Windows.Forms.ComboBox();
+            this.arrivePlaceComboBox = new System.Windows.Forms.ComboBox();
+            this.arrivePlaceLabel = new System.Windows.Forms.Label();
+            this.departPlaceLabel = new System.Windows.Forms.Label();
+            this.menuBar.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noOfPassengersValue)).BeginInit();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // menuBar
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuBar.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.myAccountToolStripMenuItem,
             this.logOutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1064, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuBar.Location = new System.Drawing.Point(0, 0);
+            this.menuBar.Name = "menuBar";
+            this.menuBar.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuBar.Size = new System.Drawing.Size(971, 24);
+            this.menuBar.TabIndex = 0;
+            this.menuBar.Text = "menuStrip1";
             // 
             // myAccountToolStripMenuItem
             // 
@@ -147,174 +145,162 @@ namespace AIR3550
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LemonChiffon;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
-            this.panel1.Controls.Add(this.monthCalendar2);
-            this.panel1.Controls.Add(this.monthCalendar1);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.numericUpDown1);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.comboBox2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.tripTypeComboBox);
+            this.panel1.Controls.Add(this.SearchFlightButton);
+            this.panel1.Controls.Add(this.arrivalCalendar);
+            this.panel1.Controls.Add(this.departureCalendar);
+            this.panel1.Controls.Add(this.arrivalDateLabel);
+            this.panel1.Controls.Add(this.departDateLabel);
+            this.panel1.Controls.Add(this.noOfPassengersValue);
+            this.panel1.Controls.Add(this.passengersLabel);
+            this.panel1.Controls.Add(this.departPlaceComboBox);
+            this.panel1.Controls.Add(this.arrivePlaceComboBox);
+            this.panel1.Controls.Add(this.arrivePlaceLabel);
+            this.panel1.Controls.Add(this.departPlaceLabel);
             this.panel1.Location = new System.Drawing.Point(129, 100);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(677, 489);
             this.panel1.TabIndex = 2;
             // 
-            // button1
+            // tripTypeComboBox
             // 
-            this.button1.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(264, 437);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 31);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Search ";
-            this.button1.UseVisualStyleBackColor = true;
+            this.tripTypeComboBox.FormattingEnabled = true;
+            this.tripTypeComboBox.Items.AddRange(new object[] {
+            "Round-trip",
+            "One-way"});
+            this.tripTypeComboBox.Location = new System.Drawing.Point(101, 25);
+            this.tripTypeComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.tripTypeComboBox.Name = "tripTypeComboBox";
+            this.tripTypeComboBox.Size = new System.Drawing.Size(82, 21);
+            this.tripTypeComboBox.TabIndex = 14;
+            this.tripTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.tripTypeComboBox_SelectedIndexChanged_1);
             // 
-            // radioButton2
+            // SearchFlightButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(418, 142);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(90, 23);
-            this.radioButton2.TabIndex = 12;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Roundtrip";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.SearchFlightButton.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchFlightButton.Location = new System.Drawing.Point(264, 437);
+            this.SearchFlightButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SearchFlightButton.Name = "SearchFlightButton";
+            this.SearchFlightButton.Size = new System.Drawing.Size(87, 31);
+            this.SearchFlightButton.TabIndex = 13;
+            this.SearchFlightButton.Text = "Search ";
+            this.SearchFlightButton.UseVisualStyleBackColor = true;
+            this.SearchFlightButton.Click += new System.EventHandler(this.SearchFlightButton_Click);
             // 
-            // radioButton1
+            // arrivalCalendar
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(101, 142);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 23);
-            this.radioButton1.TabIndex = 11;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "One-way";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.arrivalCalendar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.arrivalCalendar.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.arrivalCalendar.Location = new System.Drawing.Point(353, 251);
+            this.arrivalCalendar.Margin = new System.Windows.Forms.Padding(6);
+            this.arrivalCalendar.MaxDate = new System.DateTime(2026, 12, 31, 0, 0, 0, 0);
+            this.arrivalCalendar.MinDate = new System.DateTime(2023, 4, 21, 0, 0, 0, 0);
+            this.arrivalCalendar.Name = "arrivalCalendar";
+            this.arrivalCalendar.ShowToday = false;
+            this.arrivalCalendar.ShowTodayCircle = false;
+            this.arrivalCalendar.TabIndex = 10;
             // 
-            // monthCalendar2
+            // departureCalendar
             // 
-            this.monthCalendar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.monthCalendar2.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.monthCalendar2.Location = new System.Drawing.Point(353, 251);
-            this.monthCalendar2.Margin = new System.Windows.Forms.Padding(6);
-            this.monthCalendar2.MaxDate = new System.DateTime(2026, 12, 31, 0, 0, 0, 0);
-            this.monthCalendar2.MinDate = new System.DateTime(2023, 4, 21, 0, 0, 0, 0);
-            this.monthCalendar2.Name = "monthCalendar2";
-            this.monthCalendar2.ShowToday = false;
-            this.monthCalendar2.ShowTodayCircle = false;
-            this.monthCalendar2.TabIndex = 10;
+            this.departureCalendar.BackColor = System.Drawing.Color.PapayaWhip;
+            this.departureCalendar.Location = new System.Drawing.Point(55, 251);
+            this.departureCalendar.Margin = new System.Windows.Forms.Padding(6);
+            this.departureCalendar.MaxDate = new System.DateTime(2026, 12, 31, 0, 0, 0, 0);
+            this.departureCalendar.MinDate = new System.DateTime(2023, 4, 21, 0, 0, 0, 0);
+            this.departureCalendar.Name = "departureCalendar";
+            this.departureCalendar.ShowToday = false;
+            this.departureCalendar.ShowTodayCircle = false;
+            this.departureCalendar.TabIndex = 9;
             // 
-            // monthCalendar1
+            // arrivalDateLabel
             // 
-            this.monthCalendar1.BackColor = System.Drawing.Color.PapayaWhip;
-            this.monthCalendar1.Location = new System.Drawing.Point(55, 251);
-            this.monthCalendar1.Margin = new System.Windows.Forms.Padding(6);
-            this.monthCalendar1.MaxDate = new System.DateTime(2026, 12, 31, 0, 0, 0, 0);
-            this.monthCalendar1.MinDate = new System.DateTime(2023, 4, 21, 0, 0, 0, 0);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.ShowToday = false;
-            this.monthCalendar1.ShowTodayCircle = false;
-            this.monthCalendar1.TabIndex = 9;
+            this.arrivalDateLabel.AutoSize = true;
+            this.arrivalDateLabel.BackColor = System.Drawing.Color.White;
+            this.arrivalDateLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arrivalDateLabel.Location = new System.Drawing.Point(415, 226);
+            this.arrivalDateLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.arrivalDateLabel.Name = "arrivalDateLabel";
+            this.arrivalDateLabel.Size = new System.Drawing.Size(86, 19);
+            this.arrivalDateLabel.TabIndex = 8;
+            this.arrivalDateLabel.Text = "Arrival Date";
             // 
-            // label6
+            // departDateLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.White;
-            this.label6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(415, 226);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(86, 19);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Arrival Date";
+            this.departDateLabel.AutoSize = true;
+            this.departDateLabel.BackColor = System.Drawing.Color.White;
+            this.departDateLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departDateLabel.Location = new System.Drawing.Point(111, 226);
+            this.departDateLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.departDateLabel.Name = "departDateLabel";
+            this.departDateLabel.Size = new System.Drawing.Size(88, 19);
+            this.departDateLabel.TabIndex = 7;
+            this.departDateLabel.Text = "Depart Date";
             // 
-            // label5
+            // noOfPassengersValue
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.White;
-            this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(111, 226);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 19);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Depart Date";
+            this.noOfPassengersValue.Location = new System.Drawing.Point(385, 25);
+            this.noOfPassengersValue.Margin = new System.Windows.Forms.Padding(2);
+            this.noOfPassengersValue.Name = "noOfPassengersValue";
+            this.noOfPassengersValue.Size = new System.Drawing.Size(80, 20);
+            this.noOfPassengersValue.TabIndex = 6;
             // 
-            // numericUpDown1
+            // passengersLabel
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(202, 84);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(80, 20);
-            this.numericUpDown1.TabIndex = 6;
+            this.passengersLabel.AutoSize = true;
+            this.passengersLabel.BackColor = System.Drawing.Color.White;
+            this.passengersLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passengersLabel.Location = new System.Drawing.Point(280, 22);
+            this.passengersLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.passengersLabel.Name = "passengersLabel";
+            this.passengersLabel.Size = new System.Drawing.Size(83, 19);
+            this.passengersLabel.TabIndex = 5;
+            this.passengersLabel.Text = "Passengers";
             // 
-            // label4
+            // departPlaceComboBox
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.White;
-            this.label4.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(97, 82);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 19);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Passengers";
+            this.departPlaceComboBox.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.departPlaceComboBox.FormattingEnabled = true;
+            this.departPlaceComboBox.Location = new System.Drawing.Point(175, 97);
+            this.departPlaceComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.departPlaceComboBox.Name = "departPlaceComboBox";
+            this.departPlaceComboBox.Size = new System.Drawing.Size(82, 21);
+            this.departPlaceComboBox.TabIndex = 4;
             // 
-            // comboBox2
+            // arrivePlaceComboBox
             // 
-            this.comboBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(202, 23);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(82, 21);
-            this.comboBox2.TabIndex = 4;
+            this.arrivePlaceComboBox.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.arrivePlaceComboBox.FormattingEnabled = true;
+            this.arrivePlaceComboBox.Location = new System.Drawing.Point(421, 98);
+            this.arrivePlaceComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.arrivePlaceComboBox.Name = "arrivePlaceComboBox";
+            this.arrivePlaceComboBox.Size = new System.Drawing.Size(82, 21);
+            this.arrivePlaceComboBox.TabIndex = 3;
+            this.arrivePlaceComboBox.SelectedIndexChanged += new System.EventHandler(this.arrivePlaceComboBox_SelectedIndexChanged);
             // 
-            // comboBox1
+            // arrivePlaceLabel
             // 
-            this.comboBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(519, 21);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(82, 21);
-            this.comboBox1.TabIndex = 3;
+            this.arrivePlaceLabel.AutoSize = true;
+            this.arrivePlaceLabel.BackColor = System.Drawing.Color.White;
+            this.arrivePlaceLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.arrivePlaceLabel.Location = new System.Drawing.Point(350, 97);
+            this.arrivePlaceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.arrivePlaceLabel.Name = "arrivePlaceLabel";
+            this.arrivePlaceLabel.Size = new System.Drawing.Size(47, 19);
+            this.arrivePlaceLabel.TabIndex = 1;
+            this.arrivePlaceLabel.Text = "Arrive";
             // 
-            // label3
+            // departPlaceLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(415, 22);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 19);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Arrive";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(99, 22);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 19);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Depart";
+            this.departPlaceLabel.AutoSize = true;
+            this.departPlaceLabel.BackColor = System.Drawing.Color.White;
+            this.departPlaceLabel.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departPlaceLabel.Location = new System.Drawing.Point(97, 94);
+            this.departPlaceLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.departPlaceLabel.Name = "departPlaceLabel";
+            this.departPlaceLabel.Size = new System.Drawing.Size(53, 19);
+            this.departPlaceLabel.TabIndex = 0;
+            this.departPlaceLabel.Text = "Depart";
             // 
             // SearchFlights
             // 
@@ -322,28 +308,27 @@ namespace AIR3550
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::AIR3550.Properties.Resources.clouds;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1064, 761);
+            this.ClientSize = new System.Drawing.Size(971, 658);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuBar);
+            this.MainMenuStrip = this.menuBar;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "SearchFlights";
             this.Text = "SearchFlights";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuBar.ResumeLayout(false);
+            this.menuBar.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noOfPassengersValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuBar;
         private System.Windows.Forms.ToolStripMenuItem myAccountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewPointsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editAccountInfoToolStripMenuItem;
@@ -354,18 +339,18 @@ namespace AIR3550
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.MonthCalendar monthCalendar2;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.MonthCalendar arrivalCalendar;
+        private System.Windows.Forms.MonthCalendar departureCalendar;
+        private System.Windows.Forms.Label arrivalDateLabel;
+        private System.Windows.Forms.Label departDateLabel;
+        private System.Windows.Forms.NumericUpDown noOfPassengersValue;
+        private System.Windows.Forms.Label passengersLabel;
+        private System.Windows.Forms.ComboBox departPlaceComboBox;
+        private System.Windows.Forms.ComboBox arrivePlaceComboBox;
+        private System.Windows.Forms.Label arrivePlaceLabel;
+        private System.Windows.Forms.Label departPlaceLabel;
+        private System.Windows.Forms.Button SearchFlightButton;
+        private System.Windows.Forms.ComboBox tripTypeComboBox;
     }
 }
+

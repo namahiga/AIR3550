@@ -1,7 +1,7 @@
 ﻿
 namespace AIR3550
 {
-    partial class Form5
+    partial class cancelFlight
     {
         /// <summary>
         /// Required designer variable.

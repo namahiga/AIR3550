@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AIR3550
 {
-    public partial class Form5 : Form
+    public partial class cancelFlight : Form
     {
-        public Form5()
+        public cancelFlight()
         {
             InitializeComponent();
         }

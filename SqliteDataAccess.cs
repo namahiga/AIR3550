@@ -129,5 +129,42 @@ namespace AIR3550
             }
         }
 
+
+
+
+        public static List<string> LoadAirportCities()
+        {
+            try
+            {
+                using (IDbConnection connect = new SQLiteConnection(LoadConnectionString()))
+                {
+                    return connect.Query<string>("SELECT Cities FROM Airports").AsList();
+                }
+            }
+            catch (SQLiteException sqlEx)
+            {
+                Console.WriteLine(sqlEx.Message);
+                return null;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
+
