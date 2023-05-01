@@ -150,7 +150,59 @@ namespace AIR3550
 
 
 
+        private static double Haversine(double lat1, double lon1, double lat2, double lon2)
+        {
+            const double earthRadiusMiles = 3958.8; // Earth's radius in miles
+            double dLat = DegreeToRadian(lat2 - lat1);
+            double dLon = DegreeToRadian(lon2 - lon1);
 
+            lat1 = DegreeToRadian(lat1);
+            lat2 = DegreeToRadian(lat2);
+
+            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                       Math.Sin(dLon / 2) * Math.Sin(dLon / 2) * Math.Cos(lat1) * Math.Cos(lat2);
+            double c = 2 * Math.Asin(Math.Sqrt(a));
+
+            return earthRadiusMiles * c;
+        }
+
+        private static double DegreeToRadian(double degree)
+        {
+            return degree * (Math.PI / 180);
+        }
+
+
+
+        public static (double points, double money) CalculatePointsAndMoney(string departureCity, string arrivalCity)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var departureAirport = cnn.QuerySingleOrDefault<DatabaseModel>("SELECT * FROM Airports WHERE Cities = @Cities", new { Cities = departureCity });
+                var arrivalAirport = cnn.QuerySingleOrDefault<DatabaseModel>("SELECT * FROM Airports WHERE Cities = @Cities", new { Cities = arrivalCity });
+
+                if (departureAirport != null && arrivalAirport != null)
+                {
+                    Console.WriteLine($"Departure Airport: {departureAirport.Cities}, Latitude: {departureAirport.Latitude}, Longitude: {departureAirport.Longitude}");
+                    Console.WriteLine($"Arrival Airport: {arrivalAirport.Cities}, Latitude: {arrivalAirport.Latitude}, Longitude: {arrivalAirport.Longitude}");
+
+                    double distance = Haversine(departureAirport.Latitude, departureAirport.Longitude, arrivalAirport.Latitude, arrivalAirport.Longitude);
+                    Console.WriteLine($"Distance: {distance} miles");
+
+
+                    // Calculate points and money based on the distance
+                    double points = Math.Ceiling(distance * 0.18);
+                    double money = Math.Ceiling(distance * 1.6);
+
+
+                    return (points, money);
+                }
+
+                else
+                {
+                    throw new ArgumentException("Invalid departure or arrival city.");
+                }
+            }
+        }
 
 
 

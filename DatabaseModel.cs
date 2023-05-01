@@ -20,6 +20,8 @@ namespace AIR3550
         public string FullName => $"{AirportCode} - {Name}";
         public string FullLocation => $"{Cities}, {State}";
         public string Full => $"{FullName}, {FullLocation}";
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
 
         //CustomerAccount Table
         public int AccId { get; set; }

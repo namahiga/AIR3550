@@ -172,10 +172,17 @@ namespace AIR3550
 
                 ViewDepartingFlights newForm = new ViewDepartingFlights();
 
-                // Show the new form
-                newForm.Show();
 
-                this.Hide();
+                string departureCity = "Romulus";
+                string arrivalCity = "Chicago";
+
+                (double points, double money) = SqliteDataAccess.CalculatePointsAndMoney(departureCity, arrivalCity);
+
+                Console.WriteLine($"Points: {points}, Money: {money}");
+                // Show the new form
+               // newForm.Show();
+
+                //this.Hide();
             }
         }
 
