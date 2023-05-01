@@ -169,6 +169,13 @@ namespace AIR3550
 
                 // Display the selected departure and arrival cities and dates in a message box
                 MessageBox.Show($"Departure City: {selectedDeparture}\nArrival City: {selectedArrival}\nDeparture Date: {departureDate.Value.ToShortDateString()}\nArrival Date: {arrivalDate.Value.ToShortDateString()}");
+
+                ViewDepartingFlights newForm = new ViewDepartingFlights();
+
+                // Show the new form
+                newForm.Show();
+
+                this.Hide();
             }
         }
 
