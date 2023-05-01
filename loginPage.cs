@@ -41,9 +41,20 @@ namespace AIR3550
 
             if (isValidUser)
             {
-                // Navigate to the next form
-                SearchFlights form2 = new SearchFlights();
-                form2.Show();
+                // Check if the user has a username with -adm at the end
+                if (username.EndsWith("-adm"))
+                {
+                    // Navigate to the CreateFlight form
+                    CreateFlight form2 = new CreateFlight();
+                    form2.Show();
+                }
+                else
+                {
+                    // Navigate to the SearchFlights form
+                    SearchFlights form2 = new SearchFlights();
+                    form2.Show();
+                }
+
                 this.Hide();
             }
             else
@@ -51,6 +62,7 @@ namespace AIR3550
                 MessageBox.Show("Invalid username or password. Please try again.");
             }
         }
+
 
         private void CreateNewAccount_Click(object sender, EventArgs e)
         {

@@ -34,7 +34,16 @@ namespace AIR3550
 
         private void Signup_Button_Click(object sender, EventArgs e)
         {
+            // Check if the username ends with -adm
+            if (UserText.Text.EndsWith("-adm"))
+            {
+                MessageBox.Show("Username cannot end with -adm. Please choose a different username.");
+                return;
+            }
+
             DatabaseModel d = new DatabaseModel();
+
+            // The rest of your code remains unchanged
 
             d.FirstName = FNameText.Text;
             d.MiddleName = MNameText.Text;

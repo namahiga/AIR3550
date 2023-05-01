@@ -57,6 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateFlight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateFlight.Designer.cs">
+      <DependentUpon>CreateFlight.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel.cs" />
     <Compile Include="EditInfo.cs">
       <SubType>Form</SubType>
@@ -109,6 +115,9 @@
     <Compile Include="ViewDepartingFlights.Designer.cs">
       <DependentUpon>ViewDepartingFlights.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreateFlight.resx">
+      <DependentUpon>CreateFlight.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditInfo.resx">
       <DependentUpon>EditInfo.cs</DependentUpon>
     </EmbeddedResource>
