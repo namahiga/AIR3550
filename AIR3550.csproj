@@ -70,6 +70,7 @@
     <Compile Include="EditInfo.Designer.cs">
       <DependentUpon>EditInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlightModel.cs" />
     <Compile Include="SqliteDataAccess.cs" />
     <Compile Include="loginPage.cs">
       <SubType>Form</SubType>
