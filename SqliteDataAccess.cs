@@ -228,29 +228,62 @@ namespace AIR3550
             }
         }
 
-        public static void SaveFlight(FlightModel flight)
+        public static void SaveFlight(FlightModel flight, DateTime departureDate)
         {
             using (var connection = new SQLiteConnection(LoadConnectionString()))
             {
-                connection.Open();
-
-                var command = new SQLiteCommand(
-                    "INSERT INTO Flights (PlaneType, TakeoffTime, LandingTime, DepartureDate, ArrivalDate, OriginLocation, DestinationLocation, AvailableSeats, Canceled) " +
-                    "VALUES (@PlaneType, @TakeoffTime, @LandingTime, @DepartureDate, @ArrivalDate, @OriginLocation, @DestinationLocation, @AvailableSeats, @Canceled)", connection);
-
+                var query = "INSERT INTO Flights (PlaneType, TakeoffTime, LandingTime, DepartureDate, ArrivalDate, OriginLocation, DestinationLocation, AvailableSeats, Canceled) VALUES (@PlaneType, @TakeoffTime, @LandingTime, @DepartureDate, @ArrivalDate, @OriginLocation, @DestinationLocation, @AvailableSeats, @Canceled)";
+                var command = new SQLiteCommand(query, connection);
                 command.Parameters.AddWithValue("@PlaneType", flight.PlaneType);
                 command.Parameters.AddWithValue("@TakeoffTime", flight.TakeoffTime);
                 command.Parameters.AddWithValue("@LandingTime", flight.LandingTime);
-                command.Parameters.AddWithValue("@DepartureDate", flight.DepartureDate);
-                command.Parameters.AddWithValue("@ArrivalDate", flight.ArrivalDate);
+                command.Parameters.AddWithValue("@DepartureDate", departureDate);
+                command.Parameters.AddWithValue("@ArrivalDate", departureDate);
                 command.Parameters.AddWithValue("@OriginLocation", flight.OriginLocation);
                 command.Parameters.AddWithValue("@DestinationLocation", flight.DestinationLocation);
                 command.Parameters.AddWithValue("@AvailableSeats", flight.AvailableSeats);
                 command.Parameters.AddWithValue("@Canceled", flight.Canceled);
 
-                command.ExecuteNonQuery();
+                int retries = 3;
+                while (retries > 0)
+                {
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        break;
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        if (ex.Message.Contains("database is locked"))
+                        {
+                            retries--;
+                            if (retries > 0)
+                            {
+                                System.Threading.Thread.Sleep(200); // Wait for 200ms before retrying
+                            }
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    finally
+                    {
+                        if (connection.State == ConnectionState.Open)
+                        {
+                            connection.Close();
+                        }
+                    }
+                }
+
+                if (retries == 0)
+                {
+                    throw new Exception("Failed to save flight after multiple retries due to locked database.");
+                }
             }
         }
+
 
 
         public static List<AirportModel> LoadAirports()
@@ -283,6 +316,12 @@ namespace AIR3550
             }
         }
 
+        private static TimeSpan RoundToNearest15Minutes(TimeSpan time)
+        {
+            int totalMinutes = (int)Math.Round(time.TotalMinutes / 15.0) * 15;
+            return TimeSpan.FromMinutes(totalMinutes);
+        }
+
         public static List<FlightModel> GenerateFlightSchedules(List<string> planeTypes, TimeSpan refuelTime, DateTime currentDate)
         {
             var generatedFlights = new List<FlightModel>();
@@ -292,46 +331,220 @@ namespace AIR3550
 
             TimeSpan startTime = new TimeSpan(6, 0, 0); // 6:00 AM
             TimeSpan endTime = new TimeSpan(22, 0, 0); // 10:00 PM
-            TimeSpan flightDuration = TimeSpan.FromHours(2); // Assuming a 2-hour flight duration
 
-            foreach (var origin in airports)
+            DateTime endDate = currentDate.AddYears(1); // Generate flights for one year
+
+            while (currentDate < endDate)
             {
-                foreach (var destination in airports)
+                foreach (var origin in airports)
                 {
-                    if (origin.Id != destination.Id)
+                    foreach (var destination in airports)
                     {
-                        TimeSpan currentTakeoffTime = startTime;
-
-                        while (currentTakeoffTime + flightDuration <= endTime)
+                        if (origin.Id != destination.Id)
                         {
+                            double distance = Haversine(origin.Latitude, origin.Longitude, destination.Latitude, destination.Longitude);
+
                             foreach (var planeType in planeTypes)
                             {
-                                var flight = new FlightModel
+                                double speed;
+
+                                int availableSeats;
+                                switch (planeType)
                                 {
-                                    FlightID = flightIdCounter++,
-                                    PlaneType = planeType,
-                                    TakeoffTime = currentTakeoffTime,
-                                    LandingTime = currentTakeoffTime + flightDuration,
-                                    DepartureDate = currentDate,
-                                    ArrivalDate = currentDate, // Assuming same-day arrival
-                                    OriginLocation = origin.Cities, // Using Cities property for OriginLocation
-                                    DestinationLocation = destination.Cities, // Using Cities property for DestinationLocation
-                                    AvailableSeats = 100, // Set the number of available seats for each flight
-                                    Canceled = false
-                                };
+                                    case "Boeing737":
+                                        speed = 520;
+                                        availableSeats = 100;
+                                        break;
+                                    case "Boeing767":
+                                        speed = 530;
+                                        availableSeats = 150;
+                                        break;
+                                    case "Boeing787":
+                                        speed = 560;
+                                        availableSeats = 250;
+                                        break;
+                                    default:
+                                        throw new ArgumentException($"Invalid plane type: {planeType}");
+                                }
 
-                                generatedFlights.Add(flight);
+                                TimeSpan flightDuration = TimeSpan.FromHours(distance / speed);
+
+                                TimeSpan currentTakeoffTime = RoundToNearest15Minutes(startTime);
+
+
+                                while (currentTakeoffTime + flightDuration <= endTime)
+                                {
+                                    var flight = new FlightModel
+                                    {
+                                        FlightID = flightIdCounter++,
+                                        PlaneType = planeType,
+                                        TakeoffTime = currentTakeoffTime,
+                                        LandingTime = RoundToNearest15Minutes(currentTakeoffTime + flightDuration),
+                                        DepartureDate = currentDate,
+                                        ArrivalDate = currentDate, // Assuming same-day arrival
+                                        OriginLocation = origin.Cities, // Using Cities property for OriginLocation
+                                        DestinationLocation = destination.Cities, // Using Cities property for DestinationLocation
+                                        AvailableSeats = availableSeats,
+                                        Canceled = false
+                                    };
+
+                                    generatedFlights.Add(flight);
+
+                                    // Increment the current takeoff time by flightDuration, refuelTime, and a buffer time for boarding and deboarding
+                                    currentTakeoffTime = RoundToNearest15Minutes(currentTakeoffTime + flightDuration + refuelTime + TimeSpan.FromMinutes(30));
+                                }
                             }
-
-                            // Increment the current takeoff time by flightDuration, refuelTime, and a buffer time for boarding and deboarding
-                            currentTakeoffTime += flightDuration + refuelTime + TimeSpan.FromMinutes(30);
                         }
                     }
                 }
+
+                currentDate = currentDate.AddDays(1); // Move to the next day
             }
 
             return generatedFlights;
         }
+
+
+
+        public static void GenerateAndSaveFlights()
+        {
+            DateTime startDate = DateTime.Now.Date;
+            DateTime endDate = startDate.AddDays(15);
+
+            List<string> planeTypes = new List<string> { "Boeing737", "Boeing767", "Boeing787" };
+            TimeSpan refuelTime = TimeSpan.FromHours(1);
+
+            for (var currentDate = startDate; currentDate <= endDate; currentDate = currentDate.AddDays(1))
+            {
+                var generatedFlights = GenerateFlightSchedules(planeTypes, refuelTime, currentDate);
+                foreach (var flight in generatedFlights)
+                {
+                    SaveFlight(flight, currentDate);
+                }
+            }   
+        }
+
+
+        public static void UpdateFlightCancellationStatus(int flightID, bool canceled)
+        {
+            using (var connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var query = "UPDATE Flights SET Canceled = @Canceled WHERE FlightID = @FlightID";
+                var command = new SQLiteCommand(query, connection);
+                command.Parameters.AddWithValue("@FlightID", flightID);
+                command.Parameters.AddWithValue("@Canceled", canceled);
+
+                int retries = 3;
+                while (retries > 0)
+                {
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        break;
+                    }
+                    catch (SQLiteException ex)
+                    {
+                        if (ex.Message.Contains("database is locked"))
+                        {
+                            retries--;
+                            if (retries > 0)
+                            {
+                                System.Threading.Thread.Sleep(200); // Wait for 200ms before retrying
+                            }
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    finally
+                    {
+                        if (connection.State == ConnectionState.Open)
+                        {
+                            connection.Close();
+                        }
+                    }
+                }
+
+                if (retries == 0)
+                {
+                    throw new Exception("Failed to update flight cancellation status after multiple retries due to locked database.");
+                }
+            }
+        }
+
+
+        public static DateTime? GetLastFlightGenerationDate()
+        {
+            using (var connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                connection.Open();
+
+                var command = new SQLiteCommand("SELECT MAX(DepartureDate) FROM Flights", connection);
+                var result = command.ExecuteScalar();
+
+                if (result != DBNull.Value)
+                {
+                    return Convert.ToDateTime(result);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
+        public static List<FlightModel> SearchFlights(string departureCity, string arrivalCity, DateTime departureDate)
+        {
+            using (var connection = new SQLiteConnection(LoadConnectionString()))
+            {
+                var query = "SELECT * FROM Flights WHERE OriginLocation = @DepartureCity AND DestinationLocation = @ArrivalCity AND DepartureDate = @DepartureDate";
+                var command = new SQLiteCommand(query, connection);
+                command.Parameters.AddWithValue("@DepartureCity", departureCity);
+                command.Parameters.AddWithValue("@ArrivalCity", arrivalCity);
+                command.Parameters.AddWithValue("@DepartureDate", departureDate.Date);
+
+                connection.Open();
+                var reader = command.ExecuteReader();
+
+                var flights = new List<FlightModel>();
+                while (reader.Read())
+                {
+                    flights.Add(new FlightModel
+                    {
+                        FlightID = reader.GetInt32(0),
+                        PlaneType = reader.GetString(1),
+                        TakeoffTime = reader.GetDateTime(2).TimeOfDay, // Convert DateTime to TimeSpan
+                        LandingTime = reader.GetDateTime(3).TimeOfDay, // Convert DateTime to TimeSpan
+                        DepartureDate = reader.GetDateTime(4),
+                        ArrivalDate = reader.GetDateTime(5),
+                        OriginLocation = reader.GetString(6),
+                        DestinationLocation = reader.GetString(7),
+                        AvailableSeats = reader.GetInt32(8),
+                        Canceled = reader.GetBoolean(9),
+                    });
+                }
+
+                return flights;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
 

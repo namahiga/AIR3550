@@ -28,6 +28,14 @@ namespace AIR3550
             {
                 Console.WriteLine("Username: {0}, Password: {1}, First Name: {2}, Last Name: {3}, Email: {4}", account.Username, account.Password, account.FirstName, account.LastName, account.Email);
             }
+
+            // Check if the flights have been generated today
+            var lastGenerationDate = SqliteDataAccess.GetLastFlightGenerationDate();
+            if (lastGenerationDate == null || lastGenerationDate.Value.Date != DateTime.Today)
+            {
+                SqliteDataAccess.GenerateAndSaveFlights();
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new loginPage());

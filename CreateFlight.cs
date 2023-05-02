@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AIR3550
@@ -19,67 +18,47 @@ namespace AIR3550
         private void LoadFlights(DateTime selectedDate)
         {
             var flights = _flightsCache
-                .Where(f => f.DepartureDate.Date == selectedDate.Date)
+                .Where(f => f.DepartureDate.Date == selectedDate.Date || f.ArrivalDate.Date == selectedDate.Date)
                 .ToList();
             dataGridView2.DataSource = flights;
         }
 
-        private async void CreateFlight_Load(object sender, EventArgs e)
+
+        private void CreateFlight_Load(object sender, EventArgs e)
         {
             // Load all flights from the database
             _flightsCache = SqliteDataAccess.LoadFlights();
 
-            // Generate flight schedules for each day from today to the next 10 days
-            var startDate = DateTime.Now.Date;
-            var endDate = DateTime.Now.Date.AddDays(10);
-
-            await Task.Run(() =>
+            // Add a checkbox column for the Canceled property
+            var canceledColumn = new DataGridViewCheckBoxColumn
             {
-                for (var currentDate = startDate; currentDate <= endDate; currentDate = currentDate.AddDays(1))
-                {
-                    var flights = _flightsCache
-                        .Where(f => f.DepartureDate.Date == currentDate.Date)
-                        .ToList();
-
-                    if (flights.Count == 0)
-                    {
-                        List<string> planeTypes = new List<string> { "Boeing737", "Boeing767", "Boeing787" }; 
-                        TimeSpan refuelTime = TimeSpan.FromHours(1);
-                        var generatedFlights = SqliteDataAccess.GenerateFlightSchedules(planeTypes, refuelTime, currentDate);
-
-                        foreach (var flight in generatedFlights)
-                        {
-                            // Check if the flight already exists in the database
-                            var existingFlight = _flightsCache
-                                .FirstOrDefault(f =>
-                                    f.FlightID == flight.FlightID &&
-                                    f.PlaneType == flight.PlaneType &&
-                                    f.TakeoffTime == flight.TakeoffTime &&
-                                    f.LandingTime == flight.LandingTime &&
-                                    f.DepartureDate == flight.DepartureDate &&
-                                    f.ArrivalDate == flight.ArrivalDate &&
-                                    f.OriginLocation == flight.OriginLocation &&
-                                    f.DestinationLocation == flight.DestinationLocation);
-
-                            if (existingFlight == null)
-                            {
-                                SqliteDataAccess.SaveFlight(flight);
-                                _flightsCache.Add(flight);
-                            }
-                        }
-                    }
-                }
-            });
+                Name = "Canceled",
+                HeaderText = "Canceled",
+                DataPropertyName = "Canceled"
+            };
+            dataGridView2.Columns.Add(canceledColumn);
 
             monthCalendar1.MaxSelectionCount = 1;
             LoadFlights(DateTime.Now);
         }
-
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             LoadFlights(monthCalendar1.SelectionStart);
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            // Save changes to the flight cancellation status
+            foreach (DataGridViewRow row in dataGridView2.Rows)
+            {
+                if (row.DataBoundItem is FlightModel flight)
+                {
+                    SqliteDataAccess.UpdateFlightCancellationStatus(flight.FlightID, flight.Canceled);
+                }
+            }
+
+            LoadFlights(monthCalendar1.SelectionStart);
+        }
     }
 }

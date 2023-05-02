@@ -170,7 +170,7 @@ namespace AIR3550
                 // Display the selected departure and arrival cities and dates in a message box
                 MessageBox.Show($"Departure City: {selectedDeparture}\nArrival City: {selectedArrival}\nDeparture Date: {departureDate.Value.ToShortDateString()}\nArrival Date: {arrivalDate.Value.ToShortDateString()}");
 
-                ViewDepartingFlights newForm = new ViewDepartingFlights();
+                
 
 
                 string departureCity = "Romulus";
@@ -179,9 +179,13 @@ namespace AIR3550
                 (double points, double money) = SqliteDataAccess.CalculatePointsAndMoney(departureCity, arrivalCity);
 
                 Console.WriteLine($"Points: {points}, Money: {money}");
-                // Show the new form
-                newForm.Show();
 
+                // Call the SearchFlights method and pass the user-selected airports and date
+                List<FlightModel> foundFlights = SqliteDataAccess.SearchFlights(selectedDeparture, selectedArrival, departureDate.Value);
+
+                // Show the new form
+                ViewDepartingFlights newForm = new ViewDepartingFlights(foundFlights);
+                newForm.Show();
                 this.Hide();
             }
         }
